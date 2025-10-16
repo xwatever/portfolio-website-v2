@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer components {
+  .home-container {
+    @apply h-screen w-screen overflow-hidden;
+  }
+}

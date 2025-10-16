@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* .asd {
+  color: #ebe5e5;
+} */
+
+@theme {
+  --background: #ebe5e5;
+  --vh: size-full;
+  --font-display: "Inter", sans-serif;
+}
+
+@layer components {
+  html {
+    @apply font-display text-gray-800 dark:text-gray-100;
+  }
+  #body {
+    @apply min-h-screen w-full bg-[#ffffff] dark:bg-[#0f0f0f] transition-all duration-500;
+  }
+  .loading-screen {
+    @apply fixed inset-0 bg-gray-100/100 dark:bg-black/100 z-50 flex items-center justify-center gap-5;
+  }
+  .loading-screen .loading-spinner {
+    @apply w-9 h-9 border-3 border-gray-800 dark:border-gray-100 border-t-transparent dark:border-t-black rounded-full animate-spin;
+  }
+  .loading-screen .loading-text {
+    @apply text-xl animate-pulse;
+  }
+}

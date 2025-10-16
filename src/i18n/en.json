@@ -1,0 +1,29 @@
+{
+  "message": {
+    "hello": "Hello World!",
+    "switch": "Switch to Indonesian",
+    "loading": "Loading...",
+    "loading_locale": "Changing Language...",
+    "navbar": {
+      "about": "About",
+      "portfolio": "Portfolio",
+      "contact": "Contact",
+      "cog_darkmode": "Dark Mode",
+      "language_english": "English",
+      "language_indonesian": "Indonesian"
+    },
+    "home": {
+      "introduction": "Hi, I'm Muhammad Darmawan",
+      "introduction_2": "Front-end Developer, Graphic Designer"
+    },
+    "about": {
+      "introduction_1": "I'm a front end developer based in Pekanbaru, Indonesia.",
+      "introduction_2": "I've been learning to code since 2014, which has given me knowledge, foundation in programming, and a deep curiosity for how applications are built. Over the years, I've focused more on front-end development, to create seamless, accessible user interfaces that combine both functionality and design.",
+      "introduction_second": "I'm always eager to build intuitive UI components, developed an app that helped or used by many users, be proud of things i have built, and of course, exploring new tools that improve development efficiency and user experience.",
+      "introduction_graphic_design": "I'm also interested in graphic design, and/or creative stuffs, and plan to pursue a career in that field as well. Being versatile would make me skilled in both design and development, capable of handling projects independently from concept to execution.",
+      "introduction_photography": "I'm also wanted to learn and deepen my skills in photography, capturing moments when i'm (and would) travelling and explore, fuels my creativity and keeps me inspired, creating stuffs, to enjoy more being alive.",
+      "introduction_closing_1": "Feel free to visit my contacts, just to say hi, or to learn more about me, my work, or probably wanted to critize this portfolio website (that would give me feedback to improve, or to learn from my mistake). I'd love to hear from you!",
+      "introduction_closing_2": "Thanks for visiting this website!"
+    }
+  }
+}

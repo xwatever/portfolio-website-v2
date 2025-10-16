@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer components {
+  .about-container {
+    @apply h-screen w-screen overflow-hidden;
+  }
+
+  .about-container .section-transition {
+    @apply transition-transform duration-250 ease-in-out;
+  }
+}

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer components {
+  #professional-background {
+    @apply min-h-screen w-full;
+  }
+  .group:hover h3 {
+    @apply text-blue-600;
+  }
+}

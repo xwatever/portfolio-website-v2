@@ -1,0 +1,29 @@
+{
+  "message": {
+    "hello": "Halo Dunia!",
+    "switch": "Ganti ke Bahasa Inggris",
+    "loading": "Sedang Memuat...",
+    "loading_locale": "Mengubah Bahasa...",
+    "navbar": {
+      "about": "Tentang Saya",
+      "portfolio": "Portofolio",
+      "contact": "Kontak Saya",
+      "cog_darkmode": "Mode Gelap",
+      "language_english": "Bahasa Inggris",
+      "language_indonesian": "Bahasa Indonesia"
+    },
+    "home": {
+      "introduction": "Halo, Saya Muhammad Darmawan",
+      "introduction_2": "Pengembang Antarmuka, Desainer Grafis"
+    },
+    "about": {
+      "introduction_1": "Saya seorang developer front end berlokasi di Kota Pekanbaru, Indonesia.",
+      "introduction_2": "Saya telah mempelajari untuk mengoding sejak tahun 2014, yang membuat saya memiliki pengetahuan, dasar dalam programming, dan rasa keingintahuan yang tinggi untuk mengetahui bagaimana sebuah aplikasi dibuat. Seiring berjalannya waktu, saya lebih berfokus dalam pengembangan front-end, untuk membuat antarmuka pengguna yang mudah diakses, dinamis, yang menggabungkan fungsionalitas dan desain yang baik.",
+      "introduction_second": "Saya selalu berkeinginan untuk membuat komponen dengan UI yang intuitif, mengembangkan sebuah aplikasi yang dapat membantu atau digunakan banyak pengguna, menjadi bangga dengan hal yang telah saya kembangkan, dan pastinya, menjelajahi tech atau alat baru untuk mengembangkan efisiensi development dan experience pengguna.",
+      "introduction_graphic_design": "Saya juga tertarik dengan desain grafis, dan/atau hal yang berbau dengan bidang kreatif, dan berencana untuk mendapatkan sebuah karir didalam bidang tersebut. Menjadi seorang serbabisa dapat membuat saya berpengalaman di development dan desain, mampu dalam mengerjakan proyek secara independen dari konsep sampai ke eksekusi.",
+      "introduction_photography": "Saya juga menginginkan untuk mempelajari dan memperdalam kemampuan saya didalam fotografis, mengabadikan momen ketika saya (dan diupayakan) melakukan travel dan berpetualang, memicu kekreatifitasan dan tetap menginspirasi saya, membuat berbagai hal, untuk lebih bersyukur masih diberikan kehidupan sampai saat ini.",
+      "introduction_closing_1": "Jangan ragu untuk mengunjungi kontak saya, untuk menyapa, atau untuk mengetahui hal lebih mengenai saya, pekerjaan saya, atau berkemungkinan ingin mengkritis website portofolio ini (yang dapat memberikan feedback untuk pengembangan, atau untuk mempelajari kesalahan saya). Tidak sabar disini untuk mendengar balasanmu!",
+      "introduction_closing_2": "Terima kasih telah mengunjungi website ini!"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer components {
+  .projects {
+    @apply py-20 px-6;
+  }
+  .projects .card-container {
+    @apply max-w-6xl mx-auto;
+  }
+  .projects .card-container .card-title {
+    @apply text-3xl md:text-4xl font-bold text-center mb-12;
+  }
+}
