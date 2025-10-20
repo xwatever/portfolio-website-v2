@@ -104,7 +104,7 @@
                 <div class="py-1" role="none">
                   <!-- Active: "bg-gray-100 text-gray-900 outline-hidden", Not Active: "text-gray-700" -->
                   <div
-                    @click="switchTo('en')"
+                    @click="switchLocaleTo('en')"
                     class="locale"
                     role="menuitem"
                     tabindex="-1"
@@ -114,7 +114,7 @@
                     >{{ $t("message.navbar.language_english") }}
                   </div>
                   <div
-                    @click="switchTo('id')"
+                    @click="switchLocaleTo('id')"
                     class="locale"
                     role="menuitem"
                     tabindex="-1"
@@ -138,15 +138,11 @@ import "./../../assets/css/navbar.css";
 import "./../../../node_modules/flag-icons/css/flag-icons.min.css";
 import store from "./../../store/";
 import { useI18n } from "vue-i18n";
-import { ref } from "vue";
 
 export default {
   setup() {
     const { t, locale } = useI18n();
-
-    const isDark = ref(store._modules.root.state.theme.isDark);
-
-    return { t, locale, isDark };
+    return { t, locale };
   },
   data: function () {
     return {
@@ -154,6 +150,7 @@ export default {
       isOpenForCog: false,
       isOpenForLocale: false,
       locale: store.getters.currentLocale,
+      isDark: store.getters["theme/currentTheme"],
     };
   },
   mounted() {
@@ -187,18 +184,14 @@ export default {
         }
       }
     },
-    switchTo(lang) {
+    switchLocaleTo(lang) {
       setTimeout(() => {
         this.isOpenForLocale = false;
       }, 250);
       this.$emit("locale", lang);
     },
     toggleDark() {
-      store.dispatch("theme/toggleDark");
-      var vm = this;
-      setTimeout(() => {
-        vm.isDark = store._modules.root.state.theme.isDark;
-      }, 150);
+      this.$emit("theme");
     },
   },
 };

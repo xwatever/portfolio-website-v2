@@ -1,12 +1,12 @@
 <template>
-  <Navbar @locale="switchLanguage" />
+  <Navbar @locale="switchLanguage" @theme="switchTheme" />
 
   <transition name="fade" mode="out-in">
     <router-view />
   </transition>
 
   <transition name="fade">
-    <div v-if="isLoading" class="loading-screen">
+    <div v-if="isLoading" id="loading-screen">
       <div class="loading-spinner"></div>
       <div v-if="!isLoadingLocale" class="loading-text">
         {{ $t("message.loading") }}
@@ -20,12 +20,14 @@
 
 <script>
 import "./assets/css/main.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import Navbar from "./components/essentials/NavbarComponent.vue";
 import router from "./router";
 import store from "./store";
 
 import { useI18n } from "vue-i18n";
 import { loadLanguageAsync } from "./i18n";
+import { ref } from "vue";
 
 export default {
   name: "App",
@@ -34,7 +36,6 @@ export default {
   },
   setup() {
     const { t, locale } = useI18n();
-
     locale.value = store.getters.currentLocale;
 
     return { t, locale };
@@ -45,8 +46,9 @@ export default {
       isLoadingLocale: false,
     };
   },
-
   mounted() {
+    store.dispatch("theme/initTheme");
+
     router.beforeEach((to, from, next) => {
       this.isLoading = true;
       next();
@@ -56,7 +58,7 @@ export default {
       if (to.name != "portfolio") {
         setTimeout(() => {
           this.isLoading = false;
-        }, 750);
+        }, 1000);
       } else {
         setTimeout(() => {
           this.isLoading = false;
@@ -75,11 +77,17 @@ export default {
       setTimeout(() => {
         loadLanguageAsync(newLang);
         store.dispatch("changeLocale", newLang);
-
         setTimeout(() => {
           this.isLoading = false;
           this.isLoadingLocale = false;
         }, 750);
+      }, 150);
+    },
+    switchTheme() {
+      store.dispatch("theme/toggleDark");
+      var vm = this;
+      setTimeout(() => {
+        vm.isDark = store._modules.root.state.theme.isDark;
       }, 150);
     },
   },

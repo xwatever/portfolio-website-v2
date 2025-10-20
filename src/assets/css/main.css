@@ -3,10 +3,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* .asd {
-  color: #ebe5e5;
-} */
-
 @theme {
   --background: #ebe5e5;
   --vh: size-full;
@@ -15,18 +11,18 @@
 
 @layer components {
   html {
-    @apply font-display text-gray-800 dark:text-gray-100;
+    @apply font-display text-[#181a38] dark:text-[#f8f8f8];
   }
-  #body {
-    @apply min-h-screen w-full bg-[#ffffff] dark:bg-[#0f0f0f] transition-all duration-500;
+  body {
+    @apply min-h-screen w-full bg-[#ffffff] dark:bg-[#12131a] transition-all duration-500;
   }
-  .loading-screen {
+  #loading-screen {
     @apply fixed inset-0 bg-gray-100/100 dark:bg-black/100 z-50 flex items-center justify-center gap-5;
   }
-  .loading-screen .loading-spinner {
+  #loading-screen .loading-spinner {
     @apply w-9 h-9 border-3 border-gray-800 dark:border-gray-100 border-t-transparent dark:border-t-black rounded-full animate-spin;
   }
-  .loading-screen .loading-text {
+  #loading-screen .loading-text {
     @apply text-xl animate-pulse;
   }
 }

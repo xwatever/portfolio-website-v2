@@ -5,7 +5,6 @@
 
 <script>
 import "./../assets/css/home.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import HomeMain from "./../components/home/HomeMainComponent.vue";
 import PortfolioSummary from "./../components/home/PortfolioSummaryComponent.vue";
 

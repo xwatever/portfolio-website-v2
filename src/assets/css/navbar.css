@@ -10,7 +10,7 @@
     @apply fixed top-0 w-full z-50 transition-all  duration-500;
   }
   .navbar-header-scrolled {
-    @apply visible bg-[#eff0fa] dark:bg-[#000000];
+    @apply visible bg-[#d5dbec] dark:bg-[#1d1e26];
   }
   .navbar-header #navbar .navbar-menu,
   .navbar-header-scrolled #navbar .navbar-menu {
@@ -136,9 +136,6 @@
     .navbar-locale-dropdown
     .locale {
     @apply block px-4 py-2 text-sm;
-  }
-  .selected {
-    @apply font-bold;
   }
 
   .fi-id {

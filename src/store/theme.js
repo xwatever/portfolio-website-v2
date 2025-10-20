@@ -1,8 +1,10 @@
 // store/theme.js
+const savedTheme = localStorage.getItem("isDark") || "false";
+
 const themeModule = {
   namespaced: true,
   state: () => ({
-    isDark: false,
+    isDark: savedTheme,
   }),
   mutations: {
     setDark(state, value) {
@@ -12,8 +14,8 @@ const themeModule = {
       } else {
         document.documentElement.classList.remove("dark");
       }
-      // Save to sessionStorage
-      sessionStorage.setItem("isDark", value);
+      // Save to localStorage
+      localStorage.setItem("isDark", value);
     },
   },
   actions: {
@@ -21,9 +23,12 @@ const themeModule = {
       commit("setDark", !state.isDark);
     },
     initTheme({ commit }) {
-      const saved = sessionStorage.getItem("isDark");
-      commit("setDark", saved === "true"); // apply saved session value
+      const saved = localStorage.getItem("isDark");
+      commit("setDark", saved === "true"); // apply saved local value
     },
+  },
+  getters: {
+    currentTheme: (state) => state.isDark,
   },
 };
 
