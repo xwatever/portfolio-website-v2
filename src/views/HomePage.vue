@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import "./../assets/css/home.css";
 import HomeMain from "./../components/home/HomeMainComponent.vue";
 import PortfolioSummary from "./../components/home/PortfolioSummaryComponent.vue";
 
@@ -27,3 +26,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.home-container {
+  @apply h-screen w-screen overflow-hidden;
+}
+</style>

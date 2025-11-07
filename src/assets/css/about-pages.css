@@ -4,6 +4,6 @@
 
 @layer components {
   .about-container {
-    @apply min-h-screen w-full flex items-center justify-center;
+    @apply min-h-screen w-full;
   }
 }

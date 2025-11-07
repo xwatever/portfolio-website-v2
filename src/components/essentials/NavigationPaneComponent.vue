@@ -55,8 +55,6 @@
 </template>
 
 <script>
-import "./../../assets/css/navigation-pane.css";
-
 export default {
   props: ["currentIndex"],
   data: function () {
@@ -72,7 +70,25 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.navigation-pane-header {
+  @apply absolute right-2 bottom-2 md:right-9 md:bottom-9 z-50 transition-all duration-500;
+}
+.navigation-pane-header #navigation-pane {
+  @apply px-3 py-4 bg-white rounded-[100px] w-10 flex flex-col gap-1.5;
+}
+.navigation-pane-header .navigation-pane-header-hovered {
+  @apply visible bg-white rounded-[100px];
+}
+.navigation-pane-header #navigation-pane i {
+  @apply text-[12.75px] cursor-pointer;
+}
+.navigation-pane-header #navigation-pane .navigation-bullet {
+  @apply visible;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.3s ease;

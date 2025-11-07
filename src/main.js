@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store";
 import i18n from "./i18n";
 
+import "./assets/css/main.css";
+
 const app = createApp(App);
 app.use(router);
 app.use(store);

@@ -19,24 +19,20 @@
 </template>
 
 <script>
-import "./assets/css/main.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Navbar from "./components/essentials/NavbarComponent.vue";
-import router from "./router";
-import store from "./store";
 
 import { useI18n } from "vue-i18n";
 import { loadLanguageAsync } from "./i18n";
-import { ref } from "vue";
 
 export default {
   name: "App",
   components: {
     Navbar,
   },
-  setup() {
+  computed() {
     const { t, locale } = useI18n();
-    locale.value = store.getters.currentLocale;
+    locale.value = this.$store.getters.currentLocale;
 
     return { t, locale };
   },
@@ -47,14 +43,14 @@ export default {
     };
   },
   mounted() {
-    store.dispatch("theme/initTheme");
+    this.$store.dispatch("theme/initTheme");
 
-    router.beforeEach((to, from, next) => {
+    this.$router.beforeEach((to, from, next) => {
       this.isLoading = true;
       next();
     });
 
-    router.afterEach((to, from, next) => {
+    this.$router.afterEach((to, from, next) => {
       if (to.name != "portfolio") {
         setTimeout(() => {
           this.isLoading = false;
@@ -69,14 +65,14 @@ export default {
   methods: {
     async switchLanguage(val) {
       var lang = val;
-      const current = store.getters.currentLocale;
+      const current = this.$store.getters.currentLocale;
       const newLang = current != lang ? lang : current;
 
       this.isLoading = true;
       this.isLoadingLocale = true;
       setTimeout(() => {
         loadLanguageAsync(newLang);
-        store.dispatch("changeLocale", newLang);
+        this.$store.dispatch("changeLocale", newLang);
         setTimeout(() => {
           this.isLoading = false;
           this.isLoadingLocale = false;
@@ -84,10 +80,10 @@ export default {
       }, 150);
     },
     switchTheme() {
-      store.dispatch("theme/toggleDark");
+      this.$store.dispatch("theme/toggleDark");
       var vm = this;
       setTimeout(() => {
-        vm.isDark = store._modules.root.state.theme.isDark;
+        vm.isDark = this.$store._modules.root.state.theme.isDark;
       }, 150);
     },
   },
@@ -95,12 +91,16 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+#loading-screen {
+  @apply fixed inset-0 bg-gray-100/100 dark:bg-black/100 z-50 flex items-center justify-center gap-5;
 }
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+#loading-screen .loading-spinner {
+  @apply w-9 h-9 border-3 border-gray-800 dark:border-gray-100 border-t-transparent dark:border-t-black rounded-full animate-spin transition-all;
+}
+#loading-screen .loading-text {
+  @apply text-xl animate-pulse;
 }
 </style>

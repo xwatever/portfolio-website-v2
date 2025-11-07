@@ -134,8 +134,7 @@
 </template>
 
 <script>
-import "./../../assets/css/navbar.css";
-import "./../../../node_modules/flag-icons/css/flag-icons.min.css";
+// import "./../../assets/css/navbar.css";
 import store from "./../../store/";
 import { useI18n } from "vue-i18n";
 
@@ -198,7 +197,185 @@ export default {
 </script>
 
 <style scoped>
-.slide-fade-enter-active,
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import "flag-icons/css/flag-icons.min.css";
+
+#navbar {
+  @apply max-w-7xl mx-auto max-h-[71.5px] px-9 py-5 flex items-center justify-between text-[21px];
+}
+.navbar-header {
+  @apply fixed top-0 w-full z-50 transition-all  duration-500;
+}
+.navbar-header-scrolled {
+  @apply visible bg-[#d5dbec] dark:bg-[#1d1e26];
+}
+.navbar-header #navbar .navbar-menu {
+  @apply flex gap-6;
+}
+
+.navbar-header-scrolled #navbar .navbar-menu {
+  @apply flex gap-6;
+}
+.navbar-header #navbar .navbar-menu .navbar-cog {
+  @apply relative cursor-pointer;
+}
+
+.navbar-header-scrolled #navbar .navbar-menu .navbar-cog {
+  @apply relative cursor-pointer;
+}
+.navbar-header #navbar .navbar-menu .navbar-cog .navbar-cog-dropdown {
+  @apply absolute right-0 z-10 mt-2 w-50 origin-top-right rounded-md bg-white dark:bg-[#000000] shadow-lg ring-1 ring-blue-100/50 focus:outline-hidden;
+}
+
+.navbar-header-scrolled #navbar .navbar-menu .navbar-cog .navbar-cog-dropdown {
+  @apply absolute right-0 z-10 mt-2 w-50 origin-top-right rounded-md bg-white dark:bg-[#000000] shadow-lg ring-1 ring-blue-100/50 focus:outline-hidden;
+}
+.navbar-header #navbar .navbar-menu .navbar-cog .navbar-cog-dropdown .cog {
+  @apply block px-4 py-2 text-sm;
+}
+
+.navbar-header-scrolled
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog {
+  @apply block px-4 py-2 text-sm;
+}
+.navbar-header
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog
+  .navbar-cog-dark-mode {
+  @apply relative inline-flex items-center cursor-pointer;
+}
+
+.navbar-header-scrolled
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog
+  .navbar-cog-dark-mode {
+  @apply relative inline-flex items-center cursor-pointer;
+}
+
+.navbar-header
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog
+  .navbar-cog-dark-mode
+  .navbar-cog-dark-mode-container {
+  @apply sr-only;
+}
+
+.navbar-header-scrolled
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog
+  .navbar-cog-dark-mode
+  .navbar-cog-dark-mode-container {
+  @apply sr-only;
+}
+
+.navbar-header
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog
+  .navbar-cog-dark-mode
+  .navbar-cog-dark-mode-button {
+  @apply w-5 h-3 bg-gray-300  rounded-full dark:bg-gray-600;
+}
+
+.navbar-header-scrolled
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog
+  .navbar-cog-dark-mode
+  .navbar-cog-dark-mode-button {
+  @apply w-5 h-3 bg-gray-300  rounded-full dark:bg-gray-600;
+}
+
+.navbar-header
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog
+  .navbar-cog-dark-mode
+  .navbar-cog-dark-mode-toggle {
+  @apply absolute left-0.5 top-0.5 bg-white w-1.75 h-1.75 rounded-full transition-transform dark:bg-gray-200;
+}
+
+.navbar-header-scrolled
+  #navbar
+  .navbar-menu
+  .navbar-cog
+  .navbar-cog-dropdown
+  .cog
+  .navbar-cog-dark-mode
+  .navbar-cog-dark-mode-toggle {
+  @apply absolute left-0.5 top-0.5 bg-white w-1.75 h-1.75 rounded-full transition-transform dark:bg-gray-200;
+}
+
+.navbar-header #navbar .navbar-menu .navbar-locale {
+  @apply relative cursor-pointer;
+}
+
+.navbar-header-scrolled #navbar .navbar-menu .navbar-locale {
+  @apply relative cursor-pointer;
+}
+.navbar-header #navbar .navbar-menu .navbar-locale .navbar-locale-dropdown {
+  @apply absolute right-0 z-10 mt-2 w-50 origin-top-right rounded-md bg-white dark:bg-[#000000] shadow-lg ring-1 ring-blue-100/50 focus:outline-hidden;
+}
+
+.navbar-header-scrolled
+  #navbar
+  .navbar-menu
+  .navbar-locale
+  .navbar-locale-dropdown {
+  @apply absolute right-0 z-10 mt-2 w-50 origin-top-right rounded-md bg-white dark:bg-[#000000] shadow-lg ring-1 ring-blue-100/50 focus:outline-hidden;
+}
+.navbar-header
+  #navbar
+  .navbar-menu
+  .navbar-locale
+  .navbar-locale-dropdown
+  .locale {
+  @apply block px-4 py-2 text-sm;
+}
+
+.navbar-header-scrolled
+  #navbar
+  .navbar-menu
+  .navbar-locale
+  .navbar-locale-dropdown
+  .locale {
+  @apply block px-4 py-2 text-sm;
+}
+
+.fi-id {
+  @apply mr-2 box-border! border bg-cover!;
+}
+.fi-gb {
+  @apply mr-2 box-border! border bg-cover!;
+}
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
 .slide-fade-leave-active {
   transition: all 0.3s ease;
 }

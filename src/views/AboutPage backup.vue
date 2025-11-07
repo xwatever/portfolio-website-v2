@@ -1,54 +1,93 @@
 <template>
-  <div class="relative p-6 min-h-screen bg-gray-100">
-    <!-- Content -->
-    <h1 class="text-2xl font-bold mb-4">{{ t("message.hello") }}</h1>
-    <button
-      @click="changeLanguage"
-      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+  <div ref="container" class="about-container">
+    <div
+      ref="sections"
+      class="section-transition"
+      :style="{ transform: `translateY(-${currentIndex * 100}vh)` }"
     >
-      {{ t("message.switch") }}
-    </button>
-
-    <!-- Loading Overlay -->
-    <transition name="fade">
-      <div
-        v-if="loading"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
-      >
-        <div
-          class="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"
-        ></div>
-      </div>
-    </transition>
+      <BriefIntroduction />
+      <BriefIntroductionContinuation />
+      <InterestedInGraphicDesign />
+      <InterestedInPhotography />
+      <ClosingAboutPage />
+    </div>
   </div>
+  <NavigationPane :currentIndex="currentIndex" @pane="toggleViewedSection" />
 </template>
 
-<script setup>
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
+<script>
+import "./../assets/css/about.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import BriefIntroduction from "./../components/about/BriefIntroductionComponent.vue";
+import BriefIntroductionContinuation from "./../components/about/BriefIntroductionContinuationComponent.vue";
+import InterestedInGraphicDesign from "./../components/about/InterestedInGraphicDesignComponent.vue";
+import InterestedInPhotography from "./../components/about/InterestedInPhotographyComponent.vue";
+import ClosingAboutPage from "./../components/about/ClosingAboutPageComponent.vue";
+import NavigationPane from "./../components/essentials/NavigationPaneComponent.vue";
 
-const { t, locale } = useI18n();
-const loading = ref(false);
+export default {
+  components: {
+    BriefIntroduction,
+    BriefIntroductionContinuation,
+    InterestedInGraphicDesign,
+    InterestedInPhotography,
+    ClosingAboutPage,
+    NavigationPane,
+  },
+  mounted() {
+    this.total = this.pages.length;
+    window.addEventListener("wheel", this.handleScroll);
+    window.addEventListener("keydown", this.handleKeydown);
+  },
+  unmounted() {
+    window.removeEventListener("wheel", this.handleScroll);
+    window.removeEventListener("keydown", this.handleKeydown);
+  },
+  data: function () {
+    return {
+      currentIndex: 0,
+      pages: [
+        "bg-blue-600",
+        "bg-green-600",
+        "bg-purple-600",
+        "bg-white-600",
+        "bg-black-600",
+      ],
+      total: "",
+      isScrolling: false,
+    };
+  },
+  methods: {
+    handleScroll(e) {
+      if (this.isScrolling) return;
+      this.isScrolling = true;
 
-function changeLanguage() {
-  loading.value = true;
+      if (e.deltaY >= 0 || e.deltaY <= 0) {
+        const direction = e.deltaY > 0 ? 1 : -1;
+        this.currentIndex = Math.min(
+          Math.max(this.currentIndex + direction, 0),
+          this.total - 1
+        );
+      }
 
-  // Simulate delay (you could await a real async import here)
-  setTimeout(() => {
-    locale.value = locale.value === "en" ? "id" : "en";
-    loading.value = false;
-  }, 600); // adjust duration to match animation
-}
+      setTimeout(() => {
+        this.isScrolling = false;
+      }, 1500); // debounce scroll
+    },
+    handleKeydown(e) {
+      if (this.isScrolling) return;
+      if (e.key === "ArrowDown" || e.key === "PageDown") {
+        this.currentIndex = Math.min(this.currentIndex + 1, this.total - 1);
+      } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+        this.currentIndex = Math.max(this.currentIndex - 1, 0);
+      }
+      this.isScrolling = true;
+      setTimeout(() => (this.isScrolling = false), 1500);
+    },
+    toggleViewedSection(index) {
+      this.$refs.sections.style.transform = `translateY(-${index * 100}vh)`;
+      this.currentIndex = parseInt(index) - 1;
+    },
+  },
+};
 </script>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
