@@ -2,7 +2,7 @@
   <header
     :class="[
       'navigation-pane-header',
-      isHovered ? 'navigation-pane-header-hovered' : 'invisible',
+      isHovered ? 'navigation-pane-header-hovered opacity-100' : 'opacity-0',
     ]"
   >
     <div

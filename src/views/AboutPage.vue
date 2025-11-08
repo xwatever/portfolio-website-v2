@@ -9,7 +9,12 @@
         index % 2 != 0 ? 'md:flex-row!' : 'md:flex-row-reverse!',
       ]"
     >
-      <div class="section-content-image">
+      <div
+        :class="[
+          'section-content-image',
+          index === currentIndex ? 'opacity-100' : 'opacity-0',
+        ]"
+      >
         <img
           :src="page.image"
           :class="[
@@ -19,7 +24,12 @@
         />
       </div>
 
-      <div class="section-content-details">
+      <div
+        :class="[
+          'section-content-details',
+          index === currentIndex ? 'opacity-100' : 'opacity-0',
+        ]"
+      >
         <p v-if="!Array.isArray(page.description)" class="section-details">
           {{ page.description }}
         </p>
@@ -33,7 +43,7 @@
       </div>
     </div>
   </div>
-  <NavigationPane :currentIndex="currentIndex" @pane="toggleViewedSection" />
+  <NavigationPane :currentIndex="currentIndex" :pageAmount="pages.length" @pane="toggleViewedSection" />
 </template>
 
 <script>
@@ -117,7 +127,7 @@ export default {
       setTimeout(() => (this.isScrolling = false), 1500);
     },
     toggleViewedSection(index) {
-      this.currentIndex = parseInt(index) - 1;
+      this.currentIndex = parseInt(index);
     },
   },
 };
@@ -132,23 +142,23 @@ export default {
 }
 
 .about-container .section-transition {
-  @apply transition-transform duration-250 ease-in-out;
+  @apply transition-all duration-350 ease-in-out;
 }
 
 .about-container .section-container {
-  @apply flex flex-col md:gap-6 min-h-screen items-center justify-center px-12 md:px-6 pt-[71.5px];
+  @apply flex flex-col md:gap-6 min-h-screen items-center justify-center px-12 md:px-6 md:pt-[71.5px] border-2 border-amber-500;
 }
 
 .about-container .section-container .section-content-image {
-  @apply w-full flex-3 mt-[25px] md:mt-0 mb-6 md:mb-0 border-2 border-blue-700;
+  @apply w-full md:flex-[55%] pt-[15px] md:mt-0 mb-6 md:mb-0 border-2 border-blue-700 transition-all duration-2500;
 }
 
 .about-container .section-container .section-content-details {
-  @apply w-full flex-2 text-left space-y-4 border-2 border-red-700;
+  @apply w-full md:flex-[45%] text-left space-y-4 border-2 border-red-700 transition-all duration-2500;
 }
 
 .about-container .section-container .section-content-image .section-image {
-  @apply max-w-full md:max-w-[80%] rounded-xl shadow-lg;
+  @apply max-w-full h-auto mb-auto md:max-w-[80%] rounded-xl shadow-lg;
 }
 .about-container .section-container .section-content-details .section-details {
   @apply text-gray-600 dark:text-[white] text-lg leading-relaxed text-[18px] leading-[1.5];
