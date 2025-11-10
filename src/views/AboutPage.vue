@@ -43,7 +43,11 @@
       </div>
     </div>
   </div>
-  <NavigationPane :currentIndex="currentIndex" :pageAmount="pages.length" @pane="toggleViewedSection" />
+  <NavigationPane
+    :currentIndex="currentIndex"
+    :pageAmount="pages.length"
+    @pane="toggleViewedSection"
+  />
 </template>
 
 <script>
@@ -51,6 +55,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import NavigationPane from "./../components/essentials/NavigationPaneComponent.vue";
 
 import profile_image from "./../assets/img/random/sample.png";
+import graphic_design_light from "./../assets/img/about_page/introduction_graphic_design_light.svg";
+import graphic_design_dark from "./../assets/img/about_page/introduction_graphic_design_dark.svg";
 
 export default {
   components: {
@@ -146,7 +152,7 @@ export default {
 }
 
 .about-container .section-container {
-  @apply flex flex-col md:gap-6 min-h-screen items-center justify-center px-12 md:px-6 md:pt-[71.5px] border-2 border-amber-500;
+  @apply flex flex-col md:gap-6 min-h-screen items-center justify-center px-12 md:px-20 md:pt-[71.5px] border-2 border-amber-500;
 }
 
 .about-container .section-container .section-content-image {
