@@ -1,8 +1,8 @@
 <template>
-  <Navbar @locale="switchLanguage" @theme="switchTheme" />
+  <Navbar @locale="switchLanguage" @theme="switchTheme" :isDark="isDark" />
 
   <transition name="fade" mode="out-in">
-    <router-view />
+    <router-view :isDark="isDark" />
   </transition>
 
   <transition name="fade">
@@ -40,6 +40,7 @@ export default {
     return {
       isLoading: false,
       isLoadingLocale: false,
+      isDark: this.$store.getters["theme/currentTheme"],
     };
   },
   mounted() {
@@ -81,9 +82,8 @@ export default {
     },
     switchTheme() {
       this.$store.dispatch("theme/toggleDark");
-      var vm = this;
       setTimeout(() => {
-        vm.isDark = this.$store._modules.root.state.theme.isDark;
+        this.isDark = this.$store._modules.root.state.theme.isDark;
       }, 150);
     },
   },

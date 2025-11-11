@@ -32,7 +32,7 @@
               >{{ $t("message.navbar.contact") }}</a
             >
           </li>
-          <li class="navbar-cog" @click="toggleCogDropdown">
+          <li class="navbar-cog" ref="cogRef" @click="toggleCogDropdown">
             <i class="fa-solid fa-gear"></i>
 
             <transition name="slide-fade">
@@ -57,7 +57,7 @@
                     </span>
                     <i
                       :class="[
-                        isDark
+                        localIsDark
                           ? 'fa-regular fa-sun mr-2'
                           : 'fa-solid fa-sun mr-2',
                       ]"
@@ -66,7 +66,7 @@
                       <input
                         type="checkbox"
                         class="navbar-cog-dark-mode-container peer"
-                        v-model="isDark"
+                        v-model="localIsDark"
                         @change="toggleDark"
                       />
                       <div
@@ -78,7 +78,7 @@
                     </label>
                     <i
                       :class="[
-                        isDark
+                        localIsDark
                           ? 'fa-solid fa-moon ml-2'
                           : 'fa-regular fa-moon ml-2',
                       ]"
@@ -88,7 +88,11 @@
               </div>
             </transition>
           </li>
-          <li class="navbar-locale" @click="toggleLocaleDropdown">
+          <li
+            class="navbar-locale"
+            ref="localeRef"
+            @click="toggleLocaleDropdown"
+          >
             <span :class="[locale == 'en' ? 'fi fi-gb' : 'fi fi-id']"></span
             ><i class="fa-solid fa-caret-down"></i>
 
@@ -134,23 +138,48 @@
 </template>
 
 <script>
-// import "./../../assets/css/navbar.css";
-import store from "./../../store/";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useClickOutside } from "./../../composeables/useClickOutside";
 
 export default {
   setup() {
+    const cogRef = ref(null);
+    const localeRef = ref(null);
+
     const { t, locale } = useI18n();
-    return { t, locale };
+    return { t, locale, cogRef, localeRef };
+  },
+  props: ["isDark"],
+  watch: {
+    isDark(val) {
+      this.localIsDark = val;
+    },
   },
   data: function () {
     return {
       isScrolled: false,
       isOpenForCog: false,
       isOpenForLocale: false,
-      locale: store.getters.currentLocale,
-      isDark: store.getters["theme/currentTheme"],
+      locale: this.$store.getters.currentLocale,
+      localIsDark: this.isDark,
     };
+  },
+  watch: {
+    isOpenForCog(newValue, oldValue) {
+      if (newValue == true) {
+        document.addEventListener("click", this.handleClickOutsideCog);
+      } else {
+        document.removeEventListener("click", this.handleClickOutsideCog);
+      }
+    },
+    isOpenForLocale(newValue, oldValue) {
+      if (newValue == true) {
+        document.addEventListener("click", this.handleClickOutsideLocale);
+      } else {
+        document.removeEventListener("click", this.handleClickOutsideLocale);
+      }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -191,6 +220,30 @@ export default {
     },
     toggleDark() {
       this.$emit("theme");
+    },
+    handleClickOutsideCog(event) {
+      const cogDropdown = this.$el.querySelector(".navbar-cog-dropdown");
+      const cogButton = this.$el.querySelector(".navbar-cog");
+
+      const clickedInsideCog =
+        cogDropdown?.contains(event.target) ||
+        cogButton?.contains(event.target);
+
+      if (!clickedInsideCog) {
+        this.isOpenForCog = false;
+      }
+    },
+    handleClickOutsideLocale(event) {
+      const localeDropdown = this.$el.querySelector(".navbar-locale-dropdown");
+      const localeButton = this.$el.querySelector(".navbar-locale");
+
+      const clickedInsideLocale =
+        localeDropdown?.contains(event.target) ||
+        localeButton?.contains(event.target);
+
+      if (!clickedInsideLocale) {
+        this.isOpenForLocale = false;
+      }
     },
   },
 };

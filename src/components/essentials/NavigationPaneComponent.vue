@@ -47,7 +47,7 @@ export default {
 @custom-variant dark (&:where(.dark, .dark *));
 
 .navigation-pane-header {
-  @apply absolute right-2 bottom-2 md:right-9 md:bottom-9 z-50 
+  @apply absolute right-2 bottom-2 md:right-6 md:bottom-6 z-50 
     transition-all duration-500 ease-in-out opacity-100;
 }
 
