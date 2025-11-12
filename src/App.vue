@@ -67,7 +67,14 @@ export default {
     async switchLanguage(val) {
       var lang = val;
       const current = this.$store.getters.currentLocale;
-      const newLang = current != lang ? lang : current;
+      const newLang =
+        lang != ""
+          ? current != lang
+            ? lang
+            : current
+          : current == "en"
+          ? "id"
+          : "en";
 
       this.isLoading = true;
       this.isLoadingLocale = true;
