@@ -55,6 +55,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import NavigationPane from "./../components/essentials/NavigationPaneComponent.vue";
 
 import profile_image from "./../assets/img/random/sample.png";
+import first_light from "./../assets/img/about_page/introduction_first_light.svg";
+import first_dark from "./../assets/img/about_page/introduction_first_dark.svg";
 import graphic_design_light from "./../assets/img/about_page/introduction_graphic_design_light.svg";
 import graphic_design_dark from "./../assets/img/about_page/introduction_graphic_design_dark.svg";
 
@@ -63,11 +65,6 @@ export default {
     NavigationPane,
   },
   props: ["isDark"],
-  watch: {
-    isDark(val) {
-      this.pages[2].image = val ? graphic_design_dark : graphic_design_light;
-    },
-  },
   mounted() {
     this.total = this.pages.length;
     window.addEventListener("wheel", this.handleScroll);
@@ -77,17 +74,15 @@ export default {
     window.removeEventListener("wheel", this.handleScroll);
     window.removeEventListener("keydown", this.handleKeydown);
   },
-  data: function () {
-    return {
-      currentIndex: 0,
-      profile_image: profile_image,
-      pages: [
+  computed: {
+    pages() {
+      return [
         {
           description: [
             this.$t("message.about.introduction_1"),
             this.$t("message.about.introduction_2"),
           ],
-          image: profile_image,
+          image: this.isDark ? first_dark : first_light,
         },
         {
           description: this.$t("message.about.introduction_second"),
@@ -108,7 +103,13 @@ export default {
           ],
           image: profile_image,
         },
-      ],
+      ];
+    },
+  },
+  data: function () {
+    return {
+      currentIndex: 0,
+      profile_image: profile_image,
       total: "",
       isScrolling: false,
     };
@@ -158,21 +159,21 @@ export default {
 }
 
 .about-container .section-container {
-  @apply flex flex-col md:gap-6 min-h-screen items-center justify-center px-12 md:px-20 md:pt-[71.5px] border-2 border-amber-500;
+  @apply flex flex-col md:gap-14 min-h-screen items-center justify-center px-12 md:px-14 md:pt-[71.5px] border-2 border-amber-500;
 }
 
 .about-container .section-container .section-content-image {
-  @apply w-full md:flex-[55%] pt-[15px] md:pt-0 md:mt-0 mb-6 md:mb-0 border-2 border-blue-700 transition-all duration-2500;
+  @apply w-full md:flex-[72%] md:mt-0 mb-6 md:mb-0 transition-all duration-2500;
 }
 
 .about-container .section-container .section-content-details {
-  @apply w-full md:flex-[45%] text-left space-y-4 border-2 border-red-700 transition-all duration-2500;
+  @apply w-full md:flex-[28%] text-left space-y-4 transition-all duration-2500;
 }
 
 .about-container .section-container .section-content-image .section-image {
-  @apply w-full rounded-xl shadow-lg transition-all duration-350;
+  @apply w-full transition-all duration-350;
 }
 .about-container .section-container .section-content-details .section-details {
-  @apply text-gray-600 dark:text-[white] text-lg leading-relaxed text-[18px] leading-[1.5];
+  @apply text-gray-600 dark:text-[white] text-lg leading-relaxed text-[16px] md:text-[18px] leading-[1.5];
 }
 </style>

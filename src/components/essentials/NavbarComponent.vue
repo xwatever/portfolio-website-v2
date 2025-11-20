@@ -500,7 +500,7 @@ export default {
 
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: transform 0.3s ease;
+  transition: transform 0.75s ease;
 }
 .slide-right-enter-from,
 .slide-right-leave-to {
