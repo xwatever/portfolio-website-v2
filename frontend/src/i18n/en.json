@@ -1,0 +1,37 @@
+{
+  "message": {
+    "hello": "Hello World!",
+    "switch": "Switch to Indonesian",
+    "loading": "Loading...",
+    "loading_locale": "Changing Language...",
+    "navbar": {
+      "home": "Home",
+      "about": "About",
+      "portfolio": "Portfolio",
+      "contact": "Contact",
+      "cog_darkmode": "Dark Mode",
+      "cog_lightmode": "Light Mode",
+      "language_english": "English",
+      "language_indonesian": "Indonesian",
+      "cog_darkmode_mobile": "Change theme to light mode",
+      "cog_lightmode_mobile": "Change theme to dark mode",
+      "language_english_mobile": "Change language to indonesian",
+      "language_indonesian_mobile": "Change language to english"
+    },
+    "home": {
+      "introduction": "Hi, I'm Muhammad Darmawan",
+      "introduction_2": "Aspiring Full Stack Developer, Graphic Designer"
+    },
+    "about": {
+      "introduction_1": "I'm an aspiring full stack developer based in Pekanbaru, Indonesia. I've been learning programming since 2014.",
+      "introduction_2": "I've developed my knowledge through continous learning, hands-on projects, etc. so i can start a career in this field.",
+      "introduction_3": "I'm focusing on to make this knowledge into real industry experience, where i can apply what i've learned, grow further, and contribute effectively to a professional team.",
+      "introduction_second_1": "Over the years, I have grown by learning and developing with many tech stacks, trying to keeping up with modern technologies.",
+      "introduction_second_2": "Not overlooking the base of programming such as data structure, object-orientated programming, etc., and of course continous learning for transitioning or developing with these modern technologies. Making it a rewardful challenges to make me a better developer. ",
+      "introduction_graphic_design": "I also do graphic design, and/or illustration, and want to develop my skill for it. Being versatile would make me skilled in both design and development, capable of handling projects independently from concept to execution.",
+      "introduction_photography": "I also want to learn and deepen my skills in photography, capturing moments when i'm (and would) travelling and explore, fuels my creativity and keeps me inspired, creating stuffs, to enjoy more being alive.",
+      "introduction_closing_1": "Feel free to visit my contacts, just to say hi, or to learn more about me, my work, or probably wanted to critize this portfolio website (that would give me feedback to improve, or to learn from my mistake). I'd love to hear from you!",
+      "introduction_closing_2": "Thanks for visiting this website!"
+    }
+  }
+}

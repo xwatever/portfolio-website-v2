@@ -1,0 +1,18 @@
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.up = function (knex) {
+  return knex.schema.createTable("blog_post_types", function (table) {
+    table.increments("id").primary();
+    table.string("post_type");
+  });
+};
+
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.down = function (knex) {
+  return knex.schema.dropTableIfExists("blog_post_types");
+};

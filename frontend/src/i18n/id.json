@@ -1,0 +1,36 @@
+{
+  "message": {
+    "hello": "Halo Dunia!",
+    "switch": "Ganti ke Bahasa Inggris",
+    "loading": "Sedang Memuat...",
+    "loading_locale": "Mengubah Bahasa...",
+    "navbar": {
+      "about": "Tentang Saya",
+      "portfolio": "Portofolio",
+      "contact": "Kontak Saya",
+      "cog_darkmode": "Mode Gelap",
+      "cog_lightmode": "Mode Terang",
+      "language_english": "Bahasa Inggris",
+      "language_indonesian": "Bahasa Indonesia",
+      "cog_darkmode_mobile": "Ubah tema ke mode terang",
+      "cog_lightmode_mobile": "Ubah tema ke mode gelap",
+      "language_english_mobile": "Ubah bahasa menjadi bahasa indonesia",
+      "language_indonesian_mobile": "Ubah bahasa menjadi bahasa inggris"
+    },
+    "home": {
+      "introduction": "Halo, Saya Muhammad Darmawan",
+      "introduction_2": "Pengembang Antarmuka, Desainer Grafis"
+    },
+    "about": {
+      "introduction_1": "Saya seorang calon developer full stack berlokasi di Kota Pekanbaru, Negara Indonesia. Saya telah mempelajari pemrograman sejak tahun 2014.",
+      "introduction_2": "Saya telah mengembangkan pengetahuan saya melalui pembelajaran berkepanjangan, proyek langsung, dan sebagainya supaya saya dapat memulai karir saya pada bidang ini.",
+      "introduction_3": "Saya berfokus untuk membuat pengetahuan ini menjadi pengalaman industri yang nyata, dimana saya dapat menerapkan apa yang sudah saya pelajari, berkembang lebih, dan berkontribusi secara efektif pada tim profesional",
+      "introduction_second_1": "Selama bertahun-tahun, saya berkembang dengan mempelajari dan mengembangkan aplikasi saya menggunakan berbagai tech stack, berusaha mengikuti perkembangan teknologi modern.",
+      "introduction_second_2": "Tidak melupakan dasar dari pemrograman seperti struktur data, pemrograman berorientasi object, dan sebagainya, dan tentunya pembelajaran berkepanjangan untuk berstransisi atau mengembangkan dengan teknologi modern ini. Membuat hal ini tantangan berhadiah untuk membuat saya menjadi pengembang lebih baik.",
+      "introduction_graphic_design": "Saya juga melakukan desain grafis, dan/atau ilustrasi, dan berkeinginan untuk mengembangkan kemampuan saya untuk hal ini. Menjadi seorang serbabisa dapat membuat saya berpengalaman di desain dan pengembangan, mampu dalam mengerjakan proyek secara independen dari konsep sampai ke eksekusi.",
+      "introduction_photography": "Saya juga menginginkan untuk mempelajari dan memperdalam kemampuan saya didalam fotografis, mengabadikan momen ketika saya (dan diupayakan) melakukan travel dan berpetualang, memicu kekreativitasan dan tetap menginspirasi saya, membuat berbagai hal, untuk lebih bersyukur masih diberikan kehidupan sampai saat ini.",
+      "introduction_closing_1": "Jangan ragu untuk mengunjungi kontak saya, untuk menyapa, atau untuk mengetahui hal lebih mengenai saya, pekerjaan saya, atau berkemungkinan ingin mengkritis website portofolio ini (yang dapat memberikan feedback untuk pengembangan, atau untuk mempelajari kesalahan saya). Tidak sabar disini untuk mendengar balasanmu!",
+      "introduction_closing_2": "Terima kasih telah mengunjungi website ini!"
+    }
+  }
+}
