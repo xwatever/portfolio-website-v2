@@ -100,40 +100,50 @@
 
 <script>
 export default {
+  computed: {
+    locale() {
+      return this.$i18n.locale;
+    },
+  },
   data() {
     return {
       activeTab: "work",
       educations: [],
       works: [],
-      locale: this.$store.getters.currentLocale,
     };
   },
+  watch: {
+    locale() {
+      this.fetchBackgroundTranslation();
+    },
+  },
   mounted() {
-    this.$axios
-      .get(
-        "http://localhost:3000/api/professional-background-translations/work/" +
-          this.locale,
-      )
-      .then((res) => {
-        this.works = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    this.$axios
-      .get(
-        "http://localhost:3000/api/professional-background-translations/education/" +
-          this.locale,
-      )
-      .then((res) => {
-        this.educations = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.fetchBackgroundTranslation();
   },
   methods: {
+    fetchBackgroundTranslation() {
+      this.$axios
+        .get(
+          `${this.$axios.defaults.baseURL}/professional-background-translations/work/${this.locale}`,
+        )
+        .then((res) => {
+          this.works = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      this.$axios
+        .get(
+          `${this.$axios.defaults.baseURL}/professional-background-translations/education/${this.locale}`,
+        )
+        .then((res) => {
+          this.educations = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     changeTab(tab) {
       if (this.activeTab === tab) return;
 

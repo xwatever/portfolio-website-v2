@@ -30,16 +30,17 @@
           index === currentIndex ? 'opacity-100' : 'opacity-0',
         ]"
       >
-        <p v-if="!Array.isArray(page.description)" class="section-details">
-          {{ page.description }}
-        </p>
-        <p
+        <div
+          v-if="!Array.isArray(page.description)"
+          class="section-details"
+          v-html="page.description"
+        ></div>
+        <div
           v-if="Array.isArray(page.description)"
           v-for="details in page.description"
           class="section-details"
-        >
-          {{ details }}
-        </p>
+          v-html="details"
+        ></div>
       </div>
     </div>
   </div>
@@ -54,73 +55,139 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import NavigationPane from "./../components/essentials/NavigationPaneComponent.vue";
 
-import profile_image from "./../assets/img/random/sample.png";
-import first_light from "./../assets/img/about_page/introduction_first_light.svg";
-import first_dark from "./../assets/img/about_page/introduction_first_dark.svg";
-import graphic_design_light from "./../assets/img/about_page/introduction_graphic_design_light.svg";
-import graphic_design_dark from "./../assets/img/about_page/introduction_graphic_design_dark.svg";
-import photography_light from "./../assets/img/about_page/introduction_photography_light.svg";
-import photography_dark from "./../assets/img/about_page/introduction_photography_dark.svg";
-
 export default {
   components: {
     NavigationPane,
   },
   props: ["isDark"],
+  watch: {
+    locale() {
+      this.fetchAboutTranslations();
+    },
+    theme() {
+      this.fetchAboutImages();
+    },
+  },
   mounted() {
-    this.total = this.pages.length;
-    window.addEventListener("wheel", this.handleScroll);
-    window.addEventListener("keydown", this.handleKeydown);
+    this.fetchAboutPost();
+    setTimeout(() => {
+      this.total = this.pages.length;
+      window.addEventListener("wheel", this.handleScroll);
+      window.addEventListener("keydown", this.handleKeydown);
+    }, 100);
   },
   unmounted() {
     window.removeEventListener("wheel", this.handleScroll);
     window.removeEventListener("keydown", this.handleKeydown);
   },
   computed: {
+    locale() {
+      return this.$i18n.locale;
+    },
+    theme() {
+      return this.$store.getters["theme/currentTheme"] == false
+        ? "light"
+        : "dark";
+    },
     pages() {
-      return [
-        {
-          description: [
-            this.$t("message.about.introduction_1"),
-            this.$t("message.about.introduction_2"),
-            this.$t("message.about.introduction_3"),
-          ],
-          image: this.isDark ? first_dark : first_light,
-        },
-        {
-          description: [
-            this.$t("message.about.introduction_second_1"),
-            this.$t("message.about.introduction_second_2"),
-          ],
-          image: profile_image,
-        },
-        {
-          description: this.$t("message.about.introduction_graphic_design"),
-          image: this.isDark ? graphic_design_dark : graphic_design_light,
-        },
-        {
-          description: this.$t("message.about.introduction_photography"),
-          image: this.isDark ? photography_dark : photography_light,
-        },
-        {
-          description: [
-            this.$t("message.about.introduction_closing_1"),
-            this.$t("message.about.introduction_closing_2"),
-          ],
-          image: profile_image,
-        },
-      ];
+      if (!this.aboutFeedIDs.length) return [];
+
+      return this.aboutFeedIDs.map((feed) => {
+        const image = this.aboutImages.find(
+          (img) => img.about_feed_id === feed.id,
+        );
+
+        const translation = this.aboutTranslations.filter(
+          (tr) => tr.about_feed_id === feed.id,
+        );
+
+        return {
+          image: image ? `http://localhost:5173${image.image_url}` : "",
+          description:
+            translation.length > 1
+              ? translation.map((t) => t.details)
+              : translation[0]?.details || "",
+        };
+      });
     },
   },
   data: function () {
     return {
       currentIndex: 0,
-      profile_image: profile_image,
       total: "",
       isScrolling: false,
+      aboutPostID: [],
+      aboutFeedIDs: [],
+      aboutImages: [],
+      aboutTranslations: [],
     };
   },
   methods: {
+    async fetchAboutPost() {
+      try {
+        const res = await this.$axios.get(
+          `${this.$axios.defaults.baseURL}/api/about/post/featured`,
+        );
+
+        this.aboutPostID = res.data;
+
+        console.log(this.aboutPostID);
+
+        await this.fetchAboutFeeds();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async fetchAboutFeeds() {
+      try {
+        const res = await this.$axios.get(
+          `${this.$axios.defaults.baseURL}/api/about/feeds/${this.aboutPostID.id}`,
+        );
+
+        this.aboutFeedIDs = res.data;
+
+        await this.fetchAboutImages();
+        await this.fetchAboutTranslations();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async fetchAboutImages() {
+      try {
+        var posts = {
+          feed_ids: this.aboutFeedIDs,
+          image_theme: this.theme,
+        };
+        this.$axios
+          .post(`${this.$axios.defaults.baseURL}/api/about/images`, posts)
+          .then((res) => {
+            this.aboutImages = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async fetchAboutTranslations() {
+      try {
+        var posts = {
+          feed_ids: this.aboutFeedIDs,
+          locale: this.locale,
+        };
+        this.$axios
+          .post(`${this.$axios.defaults.baseURL}/api/about/translations`, posts)
+          .then((res) => {
+            this.aboutTranslations = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    },
     handleScroll(e) {
       if (this.isScrolling) return;
       this.isScrolling = true;
@@ -128,7 +195,7 @@ export default {
         const direction = e.deltaY > 0 ? 1 : -1;
         this.currentIndex = Math.min(
           Math.max(this.currentIndex + direction, 0),
-          this.total - 1
+          this.total - 1,
         );
       }
       setTimeout(() => {

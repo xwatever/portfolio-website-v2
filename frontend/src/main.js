@@ -9,6 +9,7 @@ import "./assets/css/main.css";
 import axios from "axios";
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "http://localhost:3000";
 
 const app = createApp(App);
 

@@ -32,6 +32,11 @@ const cors = require("cors");
 
 const app = express();
 
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../public")));
+
+app.use(express.json());
+
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
@@ -47,13 +52,27 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
+    allowedHeaders: [
+      "Origin",
+      "X-Requested-With",
+      "Cookie",
+      "Content-Type",
+      "Accept",
+      "X-Access-Token",
+      "X-XSRF-Token",
+      "Authorization",
+    ],
     credentials: true,
+    methods: "GET,PATCH,POST,DELETE",
   }),
 );
 
-app.use(express.json());
-
 var professionalBackgroundTranslations = require("../api/professionalBackgroundTranslations");
+
+var aboutPosts = require("../api/aboutPosts");
+var aboutFeeds = require("../api/aboutFeeds");
+var aboutImages = require("../api/aboutImages");
+var aboutTranslations = require("../api/aboutTranslations");
 
 // Test DB route
 app.get("/", (req, res) => {
@@ -77,4 +96,26 @@ app.get(
 app.get(
   "/api/professional-background-translations/education/:locale",
   professionalBackgroundTranslations.readSelectedEducationLocale,
+);
+
+/*
+===============================================
+                      About
+===============================================
+*/
+
+app.get("/api/about/post/featured", aboutPosts.readFeaturedPost);
+
+app.get("/api/about/feeds/:post_id", aboutFeeds.readFeeds);
+
+app.post(
+  "/api/about/images",
+  express.json(),
+  aboutImages.readImagesByTheirTheme,
+);
+
+app.post(
+  "/api/about/translations",
+  express.json(),
+  aboutTranslations.readSelectedAboutLocale,
 );

@@ -8,6 +8,7 @@ exports.up = function (knex) {
     table.integer("about_feed_id").unsigned().notNullable();
     table.string("locale", 10);
     table.text("details");
+    table.integer("order");
 
     table.foreign("about_feed_id").references("id").inTable("about_feeds");
   });
@@ -21,7 +22,7 @@ exports.down = async function (knex) {
   await knex.schema.alterTable("about_translations", (table) => {
     table.dropForeign(
       ["about_feed_id"],
-      "about_translations_about_feed_id_foreign"
+      "about_translations_about_feed_id_foreign",
     );
   });
   return knex.schema.dropTableIfExists("about_translations");
